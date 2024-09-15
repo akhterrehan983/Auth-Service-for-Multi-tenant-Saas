@@ -1,0 +1,844 @@
+{
+	"info": {
+		"_postman_id": "dc3a6154-fadb-4d5d-809d-ffd9bfe97e2e",
+		"name": "Multi-Tenant Auth API",
+		"description": "Multi-Tenant Auth API Environment :- This environment is used in this collection. So make sure to set it on.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31298324"
+	},
+	"item": [
+		{
+			"name": "Authentication APIs",
+			"item": [
+				{
+					"name": "1. Sign Up API",
+					"item": [
+						{
+							"name": "Valid User and Organization",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"email\": \"akhterrehan983@gmail.com\",\r\n        \"password\": \"SecurePassword123\"\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"Test Organization\",\r\n        \"status\": 1,\r\n        \"personal\": false,\r\n        \"settings\": {}\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signup/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signup",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"email\": \"\",\r\n        \"password\": \"SecurePassword123\"\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"Test Organization\",\r\n        \"status\": 1,\r\n        \"personal\": false,\r\n        \"settings\": {}\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signup/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signup",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Already Registered",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"email\": \"akhterrehan983@gmail.com\",\r\n        \"password\": \"SecurePassword123\"\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"Another Organization\",\r\n        \"status\": 1,\r\n        \"personal\": false,\r\n        \"settings\": {}\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signup/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signup",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Organization Status",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": {\r\n        \"email\": \"newuser@example.com\",\r\n        \"password\": \"SecurePassword123\"\r\n    },\r\n    \"organization\": {\r\n        \"name\": \"Test Organization\",\r\n        \"status\": \"invalid\",\r\n        \"personal\": false,\r\n        \"settings\": {}\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signup/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signup",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2. Sign In API",
+					"item": [
+						{
+							"name": "Correct Email and Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"akhterrehan983@gmail.com\",\r\n    \"password\": \"NewSecurePassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signin/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signin",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incorrect Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"akhterrehan983@gmail.com\",\r\n    \"password\": \"WrongPassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signin/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signin",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unregistered Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"nonexistentuser@example.com\",\r\n    \"password\": \"SecurePassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signin/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signin",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Missing Fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/signin/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"signin",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3. Reset Password API",
+					"item": [
+						{
+							"name": "Valid Password Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"NewSecurePassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/reset_password/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reset_password",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unauthenticated User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "adfasf",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"NewSecurePassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/reset_password/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"reset_password",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Member Management APIs",
+			"item": [
+				{
+					"name": "Invite Member API",
+					"item": [
+						{
+							"name": "Valid Member Invite",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"org_id\": 7,\r\n    \"email\": \"newmember@example.com\",\r\n    \"role\": \"Owner\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/invite_member/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"invite_member",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Already a Member",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"org_id\": 7,\r\n    \"email\": \"newmember@example.com\",\r\n    \"role\": \"Owner\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/invite_member/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"invite_member",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"org_id\": 7,\r\n    \"email\": \"newmember@example1.com\",\r\n    \"role\": \"NonexistentRole\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/invite_member/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"invite_member",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Member API",
+					"item": [
+						{
+							"name": "Successful Deletion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/delete_member/7/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"delete_member",
+										"7",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Non-existent Member",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/delete_member/999/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"delete_member",
+										"999",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update Member Role API",
+					"item": [
+						{
+							"name": "Successful update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"Admin\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/update_member_role/6/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"update_member_role",
+										"6",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"NonexistentRole\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/update_member_role/6/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"update_member_role",
+										"6",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Statistics APIs",
+			"item": [
+				{
+					"name": "Role-wise Number of Users API",
+					"item": [
+						{
+							"name": "Successful retrieval",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/role_wise_users/?from=2024-01-01T00:00:00Z&to=2024-12-31T23:59:59Z&status=active",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"role_wise_users",
+										""
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "to",
+											"value": "2024-12-31T23:59:59Z"
+										},
+										{
+											"key": "status",
+											"value": "active"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Time Range",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/api/role_wise_users/?from=invalid_date&to=invalid_date",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"role_wise_users",
+										""
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "invalid_date"
+										},
+										{
+											"key": "to",
+											"value": "invalid_date"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Organization-wise Role-wise Number of Users API",
+					"item": [
+						{
+							"name": "Successful retrieval",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/api/org_role_wise_users/?from=2024-01-01T00:00:00Z&to=2024-12-31T23:59:59Z&status=active",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"org_role_wise_users",
+										""
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "to",
+											"value": "2024-12-31T23:59:59Z"
+										},
+										{
+											"key": "status",
+											"value": "active"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Time Range",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/api/org_role_wise_users/?from=invalid_date&to=invalid_date",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"org_role_wise_users",
+										""
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "invalid_date"
+										},
+										{
+											"key": "to",
+											"value": "invalid_date"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Organization-wise Number of Members API",
+					"item": [
+						{
+							"name": "Successful retrieval",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url}}/api/organization_wise_members/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"organization_wise_members",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
